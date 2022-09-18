@@ -198,7 +198,7 @@ export const fetchTweets = async (req: IRequest, res: Response) => {
 
 export const getFollowingReplies = async (req: IRequest, res: Response) => {
   const tweetId = req.params.tweetId;
-  const id = req.user?._id;
+  const id = req.params.userId;
 
   try {
     const user = await User.findById(id);

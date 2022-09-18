@@ -17,7 +17,11 @@ router.get("/:tweetId", requireAuth, getTweet);
 
 router.get("/replies/:tweetId/:skip", requireAuth, fetchTweets);
 
-router.get("/followingReplies/:tweetId", requireAuth, getFollowingReplies);
+router.get(
+  "/followingReplies/:tweetId/:userId",
+  requireAuth,
+  getFollowingReplies
+);
 
 router.post("/", requireAuth, upload.array("media", 4), createTweet);
 
