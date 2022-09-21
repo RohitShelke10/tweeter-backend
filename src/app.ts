@@ -17,7 +17,7 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://tweeter-self.vercel.app/",
+    origin: "https://tweeter-self.vercel.app",
     credentials: true,
   })
 );
