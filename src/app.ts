@@ -15,7 +15,7 @@ dotenv.config();
 const app: Application = express();
 const port = process.env.PORT;
 
-app.use(cors({origin: '*', credentials: true }));
+app.use(cors({ origin: "*", credentials: true, preflightContinue: false }));
 
 //Instead of body parser
 app.use(express.json());
