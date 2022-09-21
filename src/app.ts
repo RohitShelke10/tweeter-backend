@@ -16,6 +16,7 @@ const app: Application = express();
 const port = process.env.PORT;
 
 app.use(cors({ origin: "*", credentials: true, preflightContinue: false }));
+app.options("*", cors());
 
 //Instead of body parser
 app.use(express.json());
