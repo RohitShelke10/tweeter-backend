@@ -15,7 +15,12 @@ dotenv.config();
 const app: Application = express();
 const port = process.env.PORT;
 
-app.use(cors({ origin: "*", credentials: true, preflightContinue: false }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://tweeter-self.vercel.app"],
+    credentials: true,
+  })
+);
 //Instead of body parser
 app.use(express.json());
 
