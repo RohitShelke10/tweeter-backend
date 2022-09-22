@@ -35,7 +35,6 @@ export const handleSignUp = async (
     const token = createToken(user._id);
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure: true,
       sameSite: "none",
     });
     res.status(201).json({
@@ -65,7 +64,6 @@ export const handleLogin = async (
     const token = createToken(user._id);
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure: true,
       sameSite: "none",
     });
     res.status(200).json({
