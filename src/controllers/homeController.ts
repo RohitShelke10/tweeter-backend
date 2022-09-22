@@ -11,7 +11,6 @@ export const getPopularTags = async (req: IRequest, res: Response) => {
   const id = req.user?._id;
 
   try {
-    const user = await User.findById(id);
     const popularTags = await Hashtag.find()
       .sort({ tweets: -1 })
       .skip(skip)
@@ -60,7 +59,6 @@ export const getHomeTweets = async (req: IRequest, res: Response) => {
           tweetId: { $exists: true },
           $or: [
             { creator: { $in: user?.following } },
-            { creator: new ObjectId(id) },
             { retweetedUsers: { $in: user?.following } },
           ],
         },
@@ -165,7 +163,6 @@ export const getHomeTweets = async (req: IRequest, res: Response) => {
           tweetId: { $exists: false },
           $or: [
             { creator: { $in: user?.following } },
-            { creator: new ObjectId(id) },
             { retweetedUsers: { $in: user?.following } },
           ],
         },
