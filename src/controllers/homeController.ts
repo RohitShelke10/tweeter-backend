@@ -165,6 +165,7 @@ export const getHomeTweets = async (req: IRequest, res: Response) => {
           tweetId: { $exists: false },
           $or: [
             { creator: { $in: user?.following } },
+            { creator: new ObjectId(id) },
             { retweetedUsers: { $in: user?.following } },
           ],
         },
