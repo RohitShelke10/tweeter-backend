@@ -5,6 +5,7 @@ import User from "../models/users";
 import Tweet from "../models/tweets";
 import streamifier from "streamifier";
 import { cloud as cloudinary } from "../utils/cloudinaryConfig";
+import bcrypt from "bcrypt";
 
 export const editProfile = async (req: IRequest, res: Response) => {
   const id = req.user?._id;
@@ -68,11 +69,13 @@ export const editProfile = async (req: IRequest, res: Response) => {
       }
     );
     if (password) {
+      const salt = await bcrypt.genSalt();
+      const encryptedPassword = await bcrypt.hash(password, salt);
       await User.updateOne(
         { _id: id },
         {
           $set: {
-            password: password,
+            password: encryptedPassword,
           },
         }
       );
