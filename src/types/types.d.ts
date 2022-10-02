@@ -45,6 +45,7 @@ interface ITweet {
   shared: boolean;
   savedBy?: Schema.Types.ObjectId[];
   hashtags?: string[];
+  rootTweetId?: Schema.Types.ObjectId;
 }
 
 interface IComment {
