@@ -58,7 +58,7 @@ export const getHomeTweets = async (req: IRequest, res: Response) => {
         $match: {
           tweetId: { $exists: true },
           $or: [
-            { creator: id },
+            { creator: new ObjectId(id) },
             { creator: { $in: user?.following } },
             { retweetedUsers: { $in: user?.following } },
           ],
@@ -158,7 +158,7 @@ export const getHomeTweets = async (req: IRequest, res: Response) => {
               $match: {
                 tweetId: { $exists: false },
                 $or: [
-                  { creator: id },
+                  { creator: new ObjectId(id) },
                   { creator: { $in: user?.following } },
                   { retweetedUsers: { $in: user?.following } },
                 ],
