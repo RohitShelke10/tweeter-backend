@@ -12,6 +12,7 @@ const tweetSchema = new Schema<ITweet>(
     shared: { type: Boolean, required: true },
     savedBy: { type: [Schema.Types.ObjectId], ref: "User", default: [] },
     hashtags: { type: [String], default: [] },
+    rootTweetId: { type: Schema.Types.ObjectId, ref: "Tweet" },
   },
   { timestamps: true }
 );
