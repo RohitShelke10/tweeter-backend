@@ -446,10 +446,11 @@ export const deleteTweet = async (req: IRequest, res: Response) => {
     const tweet = await Tweet.findById(tweetId);
     if (tweet?.creator.toString() === id.toString()) {
       if (tweet?.hashtags) {
-        for (var hashtag in tweet.hashtags) {
+        for (const hashtag of tweet.hashtags) {
+          console.log(hashtag);
           await Hashtag.findOneAndUpdate(
             { hashtag: hashtag.toLowerCase() },
-            { $dec: { tweets: 1 } }
+            { $inc: { tweets: -1 } }
           );
         }
       }
