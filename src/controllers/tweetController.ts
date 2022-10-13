@@ -306,23 +306,24 @@ export const createTweet = async (req: IRequest, res: Response) => {
         tweetId: tweetId,
         tweet: tweet,
         shared: shared ? shared : true,
-        hashtags: hashtags ? hashtags : [],
+        hashtags: hashtags ? JSON.parse(hashtags) : [],
       });
     } else {
       newTweet = await Tweet.create({
         creator: id,
         tweet: tweet,
         shared: shared ? shared : true,
-        hashtags: hashtags ? hashtags : [],
+        hashtags: hashtags ? JSON.parse(hashtags) : [],
       });
     }
     if (hashtags) {
-      for (var i = 0; i < hashtags.length; i++) {
+      const trends = JSON.parse(hashtags);
+      for (var i = 0; i < trends.length; i++) {
         await Hashtag.findOneAndUpdate(
-          { hashtag: hashtags[i].toLowerCase() },
+          { hashtag: trends[i].toLowerCase() },
           {
             $set: {
-              hashtag: hashtags[i].toLowerCase(),
+              hashtag: trends[i].toLowerCase(),
               lastUsed: new Date(Date.now()),
             },
             $inc: { tweets: 1 },
